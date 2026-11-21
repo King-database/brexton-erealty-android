@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050d2a">
+<title>BREXTON eRealty</title>
+<style>
+:root{color-scheme:dark;--navy:#050d2a;--panel:#0d1b42;--blue:#1268ff;--cyan:#20d9e8;--muted:#a9b9d8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(ellipse at 50% 0%,#12336d 0%,var(--navy) 58%);color:#fff}
+body{min-height:100dvh;display:flex;flex-direction:column}
+header{padding:calc(env(safe-area-inset-top) + 22px) 22px 12px;text-align:center}
+.logo{width:112px;height:112px;object-fit:cover;border-radius:27px;box-shadow:0 16px 44px #001b59aa}
+h1{font-size:27px;letter-spacing:.3px;margin:18px 0 6px;font-weight:800}
+.sub{color:var(--muted);font-size:14px;line-height:1.5;margin:0 auto;max-width:300px}
+main{width:min(100% - 36px,460px);margin:24px auto 28px;display:grid;gap:14px;flex:1;align-content:start}
+.choice{display:flex;align-items:center;gap:15px;text-align:left;padding:19px;border:1px solid #294777;border-radius:20px;background:linear-gradient(145deg,#122b5b,#0a1738);color:white;text-decoration:none;box-shadow:0 12px 30px #0003;min-height:112px}
+.choice:active{transform:scale(.985);background:#17396e}
+.symbol{width:52px;height:52px;flex:none;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue));font-size:25px}
+.choice strong{display:block;font-size:17px;margin-bottom:5px}
+.choice small{display:block;color:#b8c8e5;font-size:12px;line-height:1.4}
+.arrow{margin-left:auto;color:#75dff5;font-size:23px}
+.note{text-align:center;color:#8398bd;font-size:11px;padding:8px 20px calc(env(safe-area-inset-bottom) + 16px)}
+footer{font-size:11px;color:#6f86b3;text-align:center;padding:10px 20px 22px}
+</style>
+</head>
+<body>
+<header>
+  <img class="logo" src="assets/icon-only.png" alt="BREXTON eRealty icon">
+  <h1>BREXTON eRealty</h1>
+  <p class="sub">Your property network, connected. Choose where you want to go.</p>
+</header>
+<main>
+  <a class="choice" href="https://public-figure.hatchable.site/erealty/" id="marketplace">
+    <span class="symbol">⌂</span>
+    <span><strong>Public Marketplace</strong><small>Explore property listings, rentals and available homes.</small></span>
+    <span class="arrow">›</span>
+  </a>
+  <a class="choice" href="https://public-figure.hatchable.site/admin/erealty/" id="office">
+    <span class="symbol">▦</span>
+    <span><strong>Network Operations</strong><small>Sign in to manage listings, accounts and enquiries.</small></span>
+    <span class="arrow">›</span>
+  </a>
+</main>
+<div class="note">Secure access is controlled by the eRealty website. Your account permissions determine which tools you can use.</div>
+<footer>BREXTON MnS Web and IT Solutions</footer>
+<script type="module">
+import { App } from '@capacitor/app';
+let onHome = true;
+document.querySelectorAll('a.choice').forEach(a => a.addEventListener('click', () => {
+  // The target remains in the same Android WebView; no Chrome intent is launched here.
+  onHome = false;
+}));
+App.addListener('backButton', ({ canGoBack }) => {
+  if (history.length > 1 && canGoBack) history.back();
+  else if (!onHome) window.location.replace('/');
+  else App.exitApp();
+});
+</script>
+</body>
+</html>
