@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#071629">
+
   <title>BREXTON eRealty</title>
 
   <style>
@@ -31,15 +32,15 @@
     }
 
     .logo {
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
       margin-bottom: 20px;
     }
 
     h1 {
+      color: white;
       margin-bottom: 10px;
-      color: #ffffff;
     }
 
     p {
@@ -47,82 +48,46 @@
       line-height: 1.6;
     }
 
-    button {
+    .button {
+      display: block;
       width: 100%;
-      padding: 16px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 10px;
+      padding: 18px;
+      margin-top: 25px;
+      border-radius: 12px;
       background: #08a9e8;
       color: white;
+      text-decoration: none;
       font-size: 16px;
       font-weight: bold;
-    }
-
-    .notification {
-      background: transparent;
-      border: 1px solid #08a9e8;
-      margin-top: 12px;
     }
   </style>
 </head>
 
 <body>
+
   <main class="container">
-    <img src="assets/icon.png" alt="BREXTON eRealty" class="logo">
+
+    <img
+      src="assets/icon.png"
+      alt="BREXTON eRealty"
+      class="logo"
+    >
 
     <h1>BREXTON eRealty</h1>
+
     <p>
       Discover properties, explore listings and connect
       with property agents through our real estate platform.
     </p>
 
-    <button id="openMarketplace">
+    <a
+      class="button"
+      href="https://public-figure.hatchable.site/erealty/"
+    >
       Open Property Marketplace
-    </button>
+    </a>
 
-    <button id="enableNotifications" class="notification">
-      Enable Notifications
-    </button>
   </main>
 
-  <script type="module">
-    import { PushNotifications } from
-      '@capacitor/push-notifications';
-
-    const marketplace =
-      'https://public-figure.hatchable.site/erealty/';
-
-    document.getElementById('openMarketplace')
-      .addEventListener('click', () => {
-        window.location.href = marketplace;
-      });
-
-    document.getElementById('enableNotifications')
-      .addEventListener('click', async () => {
-        try {
-          let permission =
-            await PushNotifications.requestPermissions();
-
-          if (permission.receive !== 'granted') {
-            alert('Notification permission was not granted.');
-            return;
-          }
-
-          await PushNotifications.register();
-
-          alert('Notification registration requested.');
-        } catch (error) {
-          alert('Unable to enable notifications. Please try again.');
-          console.error(error);
-        }
-      });
-
-    document.addEventListener('backbutton', () => {
-      if (window.location.href !== marketplace) {
-        window.location.href = marketplace;
-      }
-    });
-  </script>
 </body>
 </html>
